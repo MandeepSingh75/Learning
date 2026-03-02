@@ -17,9 +17,8 @@ body { font-family:'Lato',sans-serif; background:var(--warm); color:var(--ink); 
 .login-logo em { font-style:italic; color:var(--accent); }
 .login-sub { color:var(--muted); font-size:0.88rem; margin-bottom:2rem; font-weight:300; }
 label { display:block; font-size:0.75rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); margin-bottom:0.4rem; }
-input[type=text],input[type=password],textarea,select { width:100%; padding:0.8rem 1rem; border:1.5px solid var(--border); border-radius:8px; font-family:'Lato',sans-serif; font-size:0.9rem; color:var(--ink); background:var(--warm); outline:none; transition:border-color 0.2s,box-shadow 0.2s; }
-input:focus,textarea:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(192,99,58,0.12); background:white; }
-textarea { resize:vertical; min-height:120px; line-height:1.65; }
+input[type=text],input[type=password],select { width:100%; padding:0.8rem 1rem; border:1.5px solid var(--border); border-radius:8px; font-family:'Lato',sans-serif; font-size:0.9rem; color:var(--ink); background:var(--warm); outline:none; transition:border-color 0.2s,box-shadow 0.2s; }
+input:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(192,99,58,0.12); background:white; }
 .field { margin-bottom:1.1rem; }
 .hint { font-size:0.75rem; color:var(--muted); margin-top:0.35rem; }
 .hint a { color:var(--accent); }
@@ -66,7 +65,6 @@ textarea { resize:vertical; min-height:120px; line-height:1.65; }
 .form-card.blue h3 { color:var(--blue); }
 .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
 .form-actions { display:flex; gap:0.75rem; align-items:center; margin-top:1.5rem; flex-wrap:wrap; }
-
 .btn-orange { background:var(--accent); color:white; }
 .btn-orange:hover { background:#a8502a; transform:translateY(-1px); }
 .btn-green { background:var(--green); color:white; }
@@ -74,15 +72,26 @@ textarea { resize:vertical; min-height:120px; line-height:1.65; }
 .btn-blue { background:var(--blue); color:white; }
 .btn-blue:hover { background:#2c4d72; transform:translateY(-1px); }
 
+/* RICH TEXT EDITOR */
+.editor-wrapper { border:1.5px solid var(--border); border-radius:8px; overflow:hidden; background:white; transition:border-color 0.2s, box-shadow 0.2s; }
+.editor-wrapper:focus-within { border-color:var(--accent); box-shadow:0 0 0 3px rgba(192,99,58,0.12); }
+.editor-toolbar { display:flex; align-items:center; gap:2px; padding:0.5rem 0.6rem; background:var(--warm); border-bottom:1px solid var(--border); flex-wrap:wrap; }
+.tb-btn { background:none; border:none; cursor:pointer; padding:0.3rem 0.45rem; border-radius:5px; font-size:0.85rem; color:var(--ink); transition:all 0.15s; display:inline-flex; align-items:center; justify-content:center; min-width:28px; height:28px; font-family:'Lato',sans-serif; }
+.tb-btn:hover { background:var(--border); }
+.tb-btn.active { background:var(--accent); color:white; }
+.tb-sep { width:1px; height:20px; background:var(--border); margin:0 4px; }
+.tb-color { position:relative; }
+.tb-color input[type=color] { position:absolute; opacity:0; width:28px; height:28px; cursor:pointer; top:0; left:0; }
+.editor-body { min-height:140px; padding:0.85rem 1rem; font-size:0.92rem; line-height:1.75; color:var(--ink); outline:none; font-family:'Lato',sans-serif; }
+.editor-body:empty::before { content:attr(data-placeholder); color:#aaa; pointer-events:none; }
+
 /* ENTRY ROWS */
 .entries-list { display:flex; flex-direction:column; gap:0.75rem; }
 .entry-row { background:var(--white); border:1px solid var(--border); border-radius:10px; padding:1.1rem 1.4rem; display:flex; align-items:flex-start; justify-content:space-between; gap:1rem; transition:all 0.15s; }
 .entry-row:hover { border-color:var(--accent); box-shadow:0 3px 12px rgba(0,0,0,0.06); }
 .entry-row-info { flex:1; min-width:0; }
 .entry-row-meta { font-size:0.72rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:0.25rem; }
-.c-orange { color:var(--accent); }
-.c-green { color:var(--green); }
-.c-blue { color:var(--blue); }
+.c-orange { color:var(--accent); } .c-green { color:var(--green); } .c-blue { color:var(--blue); }
 .entry-row-title { font-family:'Playfair Display',serif; font-size:1rem; margin-bottom:0.2rem; }
 .entry-row-preview { font-size:0.82rem; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:420px; }
 .entry-row-actions { display:flex; gap:0.4rem; flex-shrink:0; }
@@ -94,7 +103,6 @@ textarea { resize:vertical; min-height:120px; line-height:1.65; }
 .spinner { width:14px; height:14px; border:2px solid rgba(0,0,0,0.1); border-top-color:var(--accent); border-radius:50%; animation:spin 0.7s linear infinite; }
 @keyframes spin { to{transform:rotate(360deg)} }
 
-/* TOAST */
 #toast { position:fixed; bottom:1.5rem; right:1.5rem; background:var(--ink); color:white; padding:0.9rem 1.4rem; border-radius:10px; font-size:0.88rem; font-weight:700; box-shadow:0 8px 30px rgba(0,0,0,0.2); transform:translateY(80px); opacity:0; transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1); z-index:999; max-width:320px; }
 #toast.show { transform:translateY(0); opacity:1; }
 #toast.success { background:var(--success); }
@@ -163,7 +171,27 @@ textarea { resize:vertical; min-height:120px; line-height:1.65; }
             <div class="field"><label>Entry Number</label><input type="text" id="d-num" placeholder="002"></div>
           </div>
           <div class="field"><label>Title</label><input type="text" id="d-title" placeholder="What did you learn today?"></div>
-          <div class="field"><label>Content</label><textarea id="d-content" placeholder="Write about your learning..."></textarea></div>
+          <div class="field">
+            <label>Content</label>
+            <div class="editor-wrapper">
+              <div class="editor-toolbar" id="d-toolbar">
+                <button class="tb-btn" onclick="fmt('bold')" title="Bold"><b>B</b></button>
+                <button class="tb-btn" onclick="fmt('italic')" title="Italic"><i>I</i></button>
+                <button class="tb-btn" onclick="fmt('underline')" title="Underline"><u>U</u></button>
+                <div class="tb-sep"></div>
+                <button class="tb-btn" onclick="fmt('insertUnorderedList')" title="Bullet List">☰</button>
+                <button class="tb-btn" onclick="fmt('insertOrderedList')" title="Numbered List">①</button>
+                <div class="tb-sep"></div>
+                <div class="tb-btn tb-color" title="Font Color">
+                  <span>A</span>
+                  <input type="color" onchange="fmt('foreColor',this.value)" title="Font Color">
+                </div>
+                <div class="tb-sep"></div>
+                <button class="tb-btn" onclick="fmt('removeFormat')" title="Clear Formatting">✕</button>
+              </div>
+              <div class="editor-body" id="d-content" contenteditable="true" data-placeholder="Write about your learning..."></div>
+            </div>
+          </div>
           <div class="field"><label>Tags (comma separated)</label><input type="text" id="d-tags" placeholder="Web Dev, Systems"></div>
           <div class="form-actions">
             <button class="btn btn-orange" id="d-btn" onclick="publishDaily()">🚀 Publish Entry</button>
@@ -184,8 +212,21 @@ textarea { resize:vertical; min-height:120px; line-height:1.65; }
             <div class="field"><label>Word</label><input type="text" id="v-word" placeholder="Persevere"></div>
             <div class="field"><label>Word Type</label><input type="text" id="v-type" placeholder="verb"></div>
           </div>
-          <div class="field"><label>Definition</label><textarea id="v-def" placeholder="What does it mean?" style="min-height:80px"></textarea></div>
-          <div class="field"><label>Example Sentence</label><input type="text" id="v-example" placeholder='e.g. "She persevered through months of hard work."'></div>
+          <div class="field"><label>Definition</label>
+            <div class="editor-wrapper">
+              <div class="editor-toolbar">
+                <button class="tb-btn" onclick="fmt('bold')" title="Bold"><b>B</b></button>
+                <button class="tb-btn" onclick="fmt('italic')" title="Italic"><i>I</i></button>
+                <button class="tb-btn" onclick="fmt('underline')" title="Underline"><u>U</u></button>
+                <div class="tb-sep"></div>
+                <div class="tb-btn tb-color" title="Font Color"><span>A</span><input type="color" onchange="fmt('foreColor',this.value)"></div>
+                <div class="tb-sep"></div>
+                <button class="tb-btn" onclick="fmt('removeFormat')" title="Clear">✕</button>
+              </div>
+              <div class="editor-body" id="v-def" contenteditable="true" data-placeholder="What does it mean?" style="min-height:70px"></div>
+            </div>
+          </div>
+          <div class="field"><label>Example Sentence</label><input type="text" id="v-example" placeholder='"She persevered through months of hard work."'></div>
           <div class="form-actions">
             <button class="btn btn-green" id="v-btn" onclick="publishVocab()">🚀 Add Word</button>
             <button class="btn btn-ghost" onclick="clearVocab()">Clear</button>
@@ -205,7 +246,23 @@ textarea { resize:vertical; min-height:120px; line-height:1.65; }
             <div class="field"><label>Date</label><input type="text" id="w-date"></div>
             <div class="field"><label>Title</label><input type="text" id="w-title" placeholder="Topic of your writing"></div>
           </div>
-          <div class="field"><label>Your Writing</label><textarea id="w-body" placeholder="Write your piece here..." style="min-height:180px"></textarea></div>
+          <div class="field"><label>Your Writing</label>
+            <div class="editor-wrapper">
+              <div class="editor-toolbar">
+                <button class="tb-btn" onclick="fmt('bold')" title="Bold"><b>B</b></button>
+                <button class="tb-btn" onclick="fmt('italic')" title="Italic"><i>I</i></button>
+                <button class="tb-btn" onclick="fmt('underline')" title="Underline"><u>U</u></button>
+                <div class="tb-sep"></div>
+                <button class="tb-btn" onclick="fmt('insertUnorderedList')" title="Bullet List">☰</button>
+                <button class="tb-btn" onclick="fmt('insertOrderedList')" title="Numbered List">①</button>
+                <div class="tb-sep"></div>
+                <div class="tb-btn tb-color" title="Font Color"><span>A</span><input type="color" onchange="fmt('foreColor',this.value)"></div>
+                <div class="tb-sep"></div>
+                <button class="tb-btn" onclick="fmt('removeFormat')" title="Clear">✕</button>
+              </div>
+              <div class="editor-body" id="w-body" contenteditable="true" data-placeholder="Write your piece here..." style="min-height:180px"></div>
+            </div>
+          </div>
           <div class="form-actions">
             <button class="btn btn-green" id="w-btn" onclick="publishWriting()">🚀 Publish Writing</button>
             <button class="btn btn-ghost" onclick="clearWriting()">Clear</button>
@@ -226,7 +283,23 @@ textarea { resize:vertical; min-height:120px; line-height:1.65; }
             <div class="field"><label>Tag / Category</label><input type="text" id="g-tag" placeholder="Politics, Tech, Society…"></div>
           </div>
           <div class="field"><label>Headline</label><input type="text" id="g-title" placeholder="What's on your mind?"></div>
-          <div class="field"><label>Your Thoughts</label><textarea id="g-body" placeholder="Write your thoughts..." style="min-height:160px"></textarea></div>
+          <div class="field"><label>Your Thoughts</label>
+            <div class="editor-wrapper">
+              <div class="editor-toolbar">
+                <button class="tb-btn" onclick="fmt('bold')" title="Bold"><b>B</b></button>
+                <button class="tb-btn" onclick="fmt('italic')" title="Italic"><i>I</i></button>
+                <button class="tb-btn" onclick="fmt('underline')" title="Underline"><u>U</u></button>
+                <div class="tb-sep"></div>
+                <button class="tb-btn" onclick="fmt('insertUnorderedList')" title="Bullet List">☰</button>
+                <button class="tb-btn" onclick="fmt('insertOrderedList')" title="Numbered List">①</button>
+                <div class="tb-sep"></div>
+                <div class="tb-btn tb-color" title="Font Color"><span>A</span><input type="color" onchange="fmt('foreColor',this.value)"></div>
+                <div class="tb-sep"></div>
+                <button class="tb-btn" onclick="fmt('removeFormat')" title="Clear">✕</button>
+              </div>
+              <div class="editor-body" id="g-body" contenteditable="true" data-placeholder="Write your thoughts..." style="min-height:160px"></div>
+            </div>
+          </div>
           <div class="form-actions">
             <button class="btn btn-blue" id="g-btn" onclick="publishGoings()">🚀 Publish Post</button>
             <button class="btn btn-ghost" onclick="clearGoings()">Clear</button>
@@ -252,6 +325,20 @@ const toast=(msg,type='')=>{const t=$('toast');t.textContent=msg;t.className='sh
 const setStatus=(id,msg)=>{$(id).innerHTML=msg?`<span class="spinner"></span> ${msg}`:''};
 const decode=f=>decodeURIComponent(escape(atob(f.content.replace(/\n/g,''))));
 
+// ── RICH TEXT ──
+function fmt(cmd, val=null){
+  // Find which editor is focused
+  const active = document.activeElement;
+  if(active && active.classList.contains('editor-body')){
+    active.focus();
+  }
+  document.execCommand(cmd, false, val);
+}
+
+function getEditorHTML(id){ return $(id).innerHTML; }
+function setEditorHTML(id, html){ $(id).innerHTML = html; }
+function clearEditor(id){ $(id).innerHTML = ''; }
+
 function showPanel(name,btn){
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.sidebar-link').forEach(b=>b.classList.remove('active'));
@@ -263,7 +350,7 @@ function showPanel(name,btn){
 
 // AUTH
 async function login(){
-  const user=$('gh-user').value.trim(), repo=$('gh-repo').value.trim(), token=$('gh-token').value.trim(), branch=$('gh-branch').value.trim()||'main';
+  const user=$('gh-user').value.trim(),repo=$('gh-repo').value.trim(),token=$('gh-token').value.trim(),branch=$('gh-branch').value.trim()||'main';
   if(!user||!repo||!token){$('login-error').innerHTML='<div class="error-msg">Please fill all fields.</div>';return;}
   const btn=$('login-btn'); btn.innerHTML='<span class="spinner"></span> Connecting…'; btn.disabled=true;
   cfg={user,repo,token,branch};
@@ -327,7 +414,12 @@ async function loadDaily(){
     }).join('');
   }catch(e){$('d-list').innerHTML=`<div class="error-msg">❌ ${e.message}</div>`;}
 }
-function clearDaily(){['d-date','d-num','d-title','d-content','d-tags'].forEach(id=>$(id).value='');$('d-date').value=today();$('d-btn').textContent='🚀 Publish Entry';$('d-form-title').textContent='+ New Entry';editMode={};}
+function clearDaily(){
+  ['d-date','d-num','d-title','d-tags'].forEach(id=>$(id).value='');
+  clearEditor('d-content');
+  $('d-date').value=today();
+  $('d-btn').textContent='🚀 Publish Entry';$('d-form-title').textContent='+ New Entry';editMode={};
+}
 function editDaily(i){
   const doc=new DOMParser().parseFromString(decode(dFile),'text/html');
   const c=[...doc.querySelectorAll('.container .entry-featured,.container .entry')][i];
@@ -335,19 +427,18 @@ function editDaily(i){
   const h2=c.querySelector('h2')?.textContent||'';
   $('d-num').value=(h2.match(/Entry (\d+):/)||['',''])[1];
   $('d-title').value=h2.replace(/^Entry \d+:\s*/,'');
-  $('d-content').value=c.querySelector('p')?.textContent?.trim()||'';
+  setEditorHTML('d-content', c.querySelector('p')?.innerHTML||'');
   $('d-tags').value=[...c.querySelectorAll('.tag')].map(t=>t.textContent).join(', ');
-  editMode={s:'daily',i}; $('d-btn').textContent='💾 Save Changes'; $('d-form-title').textContent='Edit Entry';
+  editMode={s:'daily',i};$('d-btn').textContent='💾 Save Changes';$('d-form-title').textContent='Edit Entry';
   window.scrollTo({top:0,behavior:'smooth'});
 }
 async function deleteDaily(i){
-  if(!confirm('Delete this entry?')) return;
+  if(!confirm('Delete this entry?'))return;
   try{
     const f=await getFile('daily/index.html');
     const doc=new DOMParser().parseFromString(decode(f),'text/html');
     const cards=[...doc.querySelectorAll('.container .entry-featured,.container .entry')];
     cards[i].remove();
-    // Promote next card to featured
     const rem=doc.querySelectorAll('.container .entry-featured,.container .entry');
     if(rem.length>0){rem[0].className='entry-featured';if(!rem[0].querySelector('.badge')){const b=doc.createElement('div');b.className='badge';b.textContent='✨ Latest Entry';rem[0].prepend(b);}}
     await putFile('daily/index.html','<!DOCTYPE html>\n'+doc.documentElement.outerHTML,f.sha,'🗑️ Delete daily entry');
@@ -355,10 +446,12 @@ async function deleteDaily(i){
   }catch(e){toast('Error: '+e.message,'error');}
 }
 async function publishDaily(){
-  const date=$('d-date').value.trim(),num=$('d-num').value.trim(),title=$('d-title').value.trim(),content=$('d-content').value.trim(),tagsRaw=$('d-tags').value.trim();
+  const date=$('d-date').value.trim(),num=$('d-num').value.trim(),title=$('d-title').value.trim();
+  const content=getEditorHTML('d-content').trim();
+  const tagsRaw=$('d-tags').value.trim();
   if(!date||!title||!content){toast('Date, Title and Content required.','error');return;}
   const tags=tagsRaw?tagsRaw.split(',').map(t=>t.trim()).filter(Boolean):[];
-  $('d-btn').disabled=true; setStatus('d-status','Fetching…');
+  $('d-btn').disabled=true;setStatus('d-status','Fetching…');
   try{
     const f=await getFile('daily/index.html');
     const doc=new DOMParser().parseFromString(decode(f),'text/html');
@@ -368,21 +461,20 @@ async function publishDaily(){
       const c=cards[editMode.i];
       c.querySelector('.entry-date').textContent=date;
       c.querySelector('h2').textContent=`Entry ${String(num||'?').padStart(3,'0')}: ${title}`;
-      c.querySelector('p').textContent=content;
+      c.querySelector('p').innerHTML=content;
       c.querySelectorAll('.tag').forEach(t=>t.remove());
       const tagDiv=c.querySelector('.tags')||doc.createElement('div');tagDiv.className='tags';
       tags.forEach(tag=>{const s=doc.createElement('span');s.className='tag';s.textContent=tag;tagDiv.appendChild(s);});
       if(!c.querySelector('.tags'))c.appendChild(tagDiv);
     } else {
-      // Demote all to regular
       cards.forEach(c=>{c.className='entry';c.querySelector('.badge')?.remove();});
-      const newCard=doc.createElement('div'); newCard.className='entry-featured';
+      const newCard=doc.createElement('div');newCard.className='entry-featured';
       newCard.innerHTML=`<div class="badge">✨ Latest Entry</div><span class="entry-date">${date}</span><h2>Entry ${String(num||(cards.length+1)).padStart(3,'0')}: ${title}</h2><p>${content}</p><div class="tags">${tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>`;
       container.prepend(newCard);
     }
     setStatus('d-status','Saving to GitHub…');
     await putFile('daily/index.html','<!DOCTYPE html>\n'+doc.documentElement.outerHTML,f.sha,(editMode.s==='daily'?'✏️ Edit':'✨ Add')+` daily: ${title}`);
-    toast('Published! Site updates in ~30s.','success'); clearDaily(); loadDaily();
+    toast('Published! Site updates in ~30s.','success');clearDaily();loadDaily();
   }catch(e){toast('Error: '+e.message,'error');}
   finally{$('d-btn').disabled=false;setStatus('d-status','');}
 }
@@ -415,13 +507,17 @@ async function loadVocab(){
     }).join('');
   }catch(e){$('v-list').innerHTML=`<div class="error-msg">❌ ${e.message}</div>`;}
 }
-function clearVocab(){['v-word','v-type','v-def','v-example'].forEach(id=>$(id).value='');$('v-btn').textContent='🚀 Add Word';$('v-form-title').textContent='+ New Word';editMode={};}
+function clearVocab(){
+  ['v-word','v-type','v-example'].forEach(id=>$(id).value='');
+  clearEditor('v-def');
+  $('v-btn').textContent='🚀 Add Word';$('v-form-title').textContent='+ New Word';editMode={};
+}
 function editVocab(i){
   const doc=new DOMParser().parseFromString(decode(vFile),'text/html');
   const c=[...doc.querySelectorAll('.vocab-card')][i];
   $('v-word').value=c.querySelector('.word')?.textContent||'';
   $('v-type').value=c.querySelector('.word-type')?.textContent||'';
-  $('v-def').value=c.querySelector('.definition')?.textContent?.trim()||'';
+  setEditorHTML('v-def', c.querySelector('.definition')?.innerHTML||'');
   $('v-example').value=c.querySelector('.example')?.textContent?.replace(/^"|"$/g,'').trim()||'';
   editMode={s:'vocab',i};$('v-btn').textContent='💾 Save Word';$('v-form-title').textContent='Edit Word';
   window.scrollTo({top:0,behavior:'smooth'});
@@ -437,7 +533,8 @@ async function deleteVocab(i){
   }catch(e){toast('Error: '+e.message,'error');}
 }
 async function publishVocab(){
-  const word=$('v-word').value.trim(),type=$('v-type').value.trim(),def=$('v-def').value.trim(),example=$('v-example').value.trim();
+  const word=$('v-word').value.trim(),type=$('v-type').value.trim();
+  const def=getEditorHTML('v-def').trim(),example=$('v-example').value.trim();
   if(!word||!def){toast('Word and Definition required.','error');return;}
   $('v-btn').disabled=true;setStatus('v-status','Saving…');
   try{
@@ -447,7 +544,7 @@ async function publishVocab(){
     if(editMode.s==='vocab'){
       const c=[...grid.querySelectorAll('.vocab-card')][editMode.i];
       c.querySelector('.word').textContent=word;c.querySelector('.word-type').textContent=type;
-      c.querySelector('.definition').textContent=def;c.querySelector('.example').textContent=`"${example}"`;
+      c.querySelector('.definition').innerHTML=def;c.querySelector('.example').textContent=`"${example}"`;
     } else {
       const card=doc.createElement('div');card.className='vocab-card';
       card.innerHTML=`<div class="word">${word}</div><div class="word-type">${type}</div><div class="definition">${def}</div><div class="example">"${example}"</div>`;
@@ -487,13 +584,18 @@ async function loadWriting(){
     }).join('');
   }catch(e){$('w-list').innerHTML=`<div class="error-msg">❌ ${e.message}</div>`;}
 }
-function clearWriting(){['w-date','w-title','w-body'].forEach(id=>$(id).value='');$('w-date').value=today();$('w-btn').textContent='🚀 Publish Writing';$('w-form-title').textContent='+ New Writing Piece';editMode={};}
+function clearWriting(){
+  ['w-date','w-title'].forEach(id=>$(id).value='');
+  clearEditor('w-body');
+  $('w-date').value=today();
+  $('w-btn').textContent='🚀 Publish Writing';$('w-form-title').textContent='+ New Writing Piece';editMode={};
+}
 function editWriting(i){
   const doc=new DOMParser().parseFromString(decode(wFile),'text/html');
   const e=[...doc.querySelectorAll('.writing-entry')][i];
   $('w-date').value=e.querySelector('.writing-date')?.textContent?.trim()||'';
   $('w-title').value=e.querySelector('.writing-title')?.textContent?.trim()||'';
-  $('w-body').value=e.querySelector('.writing-body')?.innerHTML?.replace(/<br\s*\/?>/gi,'\n\n').replace(/<[^>]+>/g,'').trim()||'';
+  setEditorHTML('w-body', e.querySelector('.writing-body')?.innerHTML||'');
   editMode={s:'writing',i};$('w-btn').textContent='💾 Save Writing';$('w-form-title').textContent='Edit Writing Piece';
   window.scrollTo({top:0,behavior:'smooth'});
 }
@@ -508,22 +610,22 @@ async function deleteWriting(i){
   }catch(e){toast('Error: '+e.message,'error');}
 }
 async function publishWriting(){
-  const date=$('w-date').value.trim(),title=$('w-title').value.trim(),body=$('w-body').value.trim();
+  const date=$('w-date').value.trim(),title=$('w-title').value.trim();
+  const body=getEditorHTML('w-body').trim();
   if(!title||!body){toast('Title and content required.','error');return;}
   $('w-btn').disabled=true;setStatus('w-status','Saving…');
   try{
     const f=await getFile('english/index.html');
     const doc=new DOMParser().parseFromString(decode(f),'text/html');
     const container=doc.querySelector('.container');
-    const bodyHtml=body.replace(/\n\n+/g,'<br><br>');
     if(editMode.s==='writing'){
       const e=[...doc.querySelectorAll('.writing-entry')][editMode.i];
       e.querySelector('.writing-date').textContent=date;
       e.querySelector('.writing-title').textContent=title;
-      e.querySelector('.writing-body').innerHTML=bodyHtml;
+      e.querySelector('.writing-body').innerHTML=body;
     } else {
       const el=doc.createElement('div');el.className='writing-entry';
-      el.innerHTML=`<span class="writing-date">${date}</span><div class="writing-title">${title}</div><div class="writing-body">${bodyHtml}</div>`;
+      el.innerHTML=`<span class="writing-date">${date}</span><div class="writing-title">${title}</div><div class="writing-body">${body}</div>`;
       const first=container.querySelector('.writing-entry');
       if(first) container.insertBefore(el,first); else container.appendChild(el);
     }
@@ -561,13 +663,18 @@ async function loadGoings(){
     }).join('');
   }catch(e){$('g-list').innerHTML=`<div class="error-msg">❌ ${e.message}</div>`;}
 }
-function clearGoings(){['g-date','g-tag','g-title','g-body'].forEach(id=>$(id).value='');$('g-date').value=today();$('g-btn').textContent='🚀 Publish Post';$('g-form-title').textContent='+ New Post';editMode={};}
+function clearGoings(){
+  ['g-date','g-tag','g-title'].forEach(id=>$(id).value='');
+  clearEditor('g-body');
+  $('g-date').value=today();
+  $('g-btn').textContent='🚀 Publish Post';$('g-form-title').textContent='+ New Post';editMode={};
+}
 function editGoings(i){
   const doc=new DOMParser().parseFromString(decode(gFile),'text/html');
   const c=[...doc.querySelectorAll('.going-card')][i];
   $('g-date').value=c.querySelector('.going-date')?.textContent?.trim()||'';
   $('g-title').value=c.querySelector('h2')?.textContent?.trim()||'';
-  $('g-body').value=c.querySelector('p')?.innerHTML?.replace(/<br\s*\/?>/gi,'\n\n').replace(/<[^>]+>/g,'').trim()||'';
+  setEditorHTML('g-body', c.querySelector('p')?.innerHTML||'');
   $('g-tag').value=c.querySelector('.going-tag')?.textContent?.trim()||'';
   editMode={s:'goings',i};$('g-btn').textContent='💾 Save Post';$('g-form-title').textContent='Edit Post';
   window.scrollTo({top:0,behavior:'smooth'});
@@ -583,23 +690,23 @@ async function deleteGoings(i){
   }catch(e){toast('Error: '+e.message,'error');}
 }
 async function publishGoings(){
-  const date=$('g-date').value.trim(),tag=$('g-tag').value.trim(),title=$('g-title').value.trim(),body=$('g-body').value.trim();
+  const date=$('g-date').value.trim(),tag=$('g-tag').value.trim(),title=$('g-title').value.trim();
+  const body=getEditorHTML('g-body').trim();
   if(!title||!body){toast('Title and content required.','error');return;}
   $('g-btn').disabled=true;setStatus('g-status','Saving…');
   try{
     const f=await getFile('goings/index.html');
     const doc=new DOMParser().parseFromString(decode(f),'text/html');
     const container=doc.querySelector('.container');
-    const bodyHtml=body.replace(/\n\n+/g,'<br><br>');
     if(editMode.s==='goings'){
       const c=[...doc.querySelectorAll('.going-card')][editMode.i];
       c.querySelector('.going-date').textContent=date;
       c.querySelector('h2').textContent=title;
-      c.querySelector('p').innerHTML=bodyHtml;
+      c.querySelector('p').innerHTML=body;
       if(c.querySelector('.going-tag'))c.querySelector('.going-tag').textContent=tag;
     } else {
       const card=doc.createElement('div');card.className='going-card';
-      card.innerHTML=`<span class="going-date">${date}</span><h2>${title}</h2><p>${bodyHtml}</p>${tag?`<span class="going-tag">${tag}</span>`:''}`;
+      card.innerHTML=`<span class="going-date">${date}</span><h2>${title}</h2><p>${body}</p>${tag?`<span class="going-tag">${tag}</span>`:''}`;
       container.prepend(card);
     }
     await putFile('goings/index.html','<!DOCTYPE html>\n'+doc.documentElement.outerHTML,f.sha,(editMode.s==='goings'?'✏️ Edit':'✨ Add')+` going: ${title}`);
